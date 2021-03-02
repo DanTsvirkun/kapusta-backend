@@ -12,7 +12,6 @@ const userSchema = new Schema({
       category: String,
       amount: Number,
       date: String,
-      _id: false,
     },
   ],
 });

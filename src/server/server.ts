@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 require("dotenv").config({ path: path.join(__dirname, "../../.env") });
 import authRouter from "../auth/auth.router";
 import transactionRouter from "../transaction/transaction.router";
+import userRouter from "../REST-entities/user/user.router";
 const swaggerDocument = require("../../swagger.json");
 
 export default class Server {
@@ -53,6 +54,7 @@ export default class Server {
   private initRoutes() {
     this.app.use("/auth", authRouter);
     this.app.use("/transaction", transactionRouter);
+    this.app.use("/user", userRouter);
     this.app.use(
       "/api-docs",
       swaggerUi.serve,

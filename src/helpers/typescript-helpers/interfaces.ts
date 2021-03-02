@@ -1,5 +1,4 @@
 import { Document } from "mongoose";
-import { MongoDBObjectId } from "./types";
 
 export interface IUser extends Document {
   email: string;
@@ -14,7 +13,7 @@ export interface ITransaction {
   category: string;
   amount: number;
   date: string;
-  id: string;
+  _id?: string;
 }
 
 export interface ISession extends Document {

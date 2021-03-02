@@ -16,5 +16,6 @@ export enum Categories {
   SPORT_AND_HOBBY = "Спорт и хобби",
   EDUCATION = "Образование",
   OTHER = "Прочее",
-  INCOME = "Доход",
+  SALARY = "З/П",
+  ADDITIONAL_INCOME = "Доп. доход",
 }
