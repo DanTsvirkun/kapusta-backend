@@ -519,6 +519,34 @@
           }
         }
       }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all your info",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1214,6 +1242,68 @@
                     "Вазон": 150,
                     "Шкаф-купе": 1050
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetUserInfo": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "example": "test@email.com"
+          },
+          "balance": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": 0
+          },
+          "transactions": {
+            "type": "array",
+            "description": "User's transactions",
+            "items": {
+              "type": "object",
+              "description": "User's transaction",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Transaction's description",
+                  "example": "Transaction's description"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Transaction's category",
+                  "enum": [
+                    "Продукты",
+                    "Алкоголь",
+                    "Развлечения",
+                    "Здоровье",
+                    "Транспорт",
+                    "Всё для дома",
+                    "Техника",
+                    "Коммуналка и связь",
+                    "Спорт и хобби",
+                    "Образование",
+                    "Прочее",
+                    "Доход"
+                  ]
+                },
+                "amount": {
+                  "type": "integer",
+                  "description": "Transaction's amount"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Transaction's date",
+                  "example": "2020-12-31"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Transaction's id",
+                  "example": "507f1f77bcf86cd799439013"
                 }
               }
             }

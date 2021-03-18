@@ -8,3 +8,12 @@ export const updateUserBalance = async (req: Request, res: Response) => {
   await user?.save();
   return res.status(200).send({ newBalance });
 };
+
+export const getUserInfo = (req: Request, res: Response) => {
+  const user = req.user;
+  return res.status(200).send({
+    email: user?.email,
+    balance: user?.balance,
+    transactions: user?.transactions,
+  });
+};
