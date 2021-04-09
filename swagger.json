@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "consumes": ["application/json", "multipart/form-data"],
+  "consumes": ["application/json"],
   "produces": ["application/json"],
   "servers": [],
   "tags": [
