@@ -11,7 +11,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [],
+  "servers": [{"url": "https://kapusta-backend.goit.global"}],
   "tags": [
     {
       "name": "Auth",
@@ -447,7 +447,7 @@
           {
             "name": "date",
             "in": "query",
-            "required": "true",
+            "required": true,
             "type": "string",
             "description": "Period dates. YYYY-MM format"
           }
@@ -482,6 +482,7 @@
       "patch": {
         "tags": ["User"],
         "summary": "Update user's balance",
+        "security": [{ "Bearer": [] }],
         "parameters": [],
         "requestBody": {
           "description": "New balance object",
@@ -552,8 +553,8 @@
   "components": {
     "schemas": {
       "RegistrationRequest": {
-        "required": ["email", "password"],
         "type": "object",
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
