@@ -60,14 +60,14 @@ export const login = async (
   });
   const accessToken = jwt.sign(
     { uid: user._id, sid: newSession._id },
-    process.env.JWT_SECRET as string,
+    process.env.JWT_ACCESS_SECRET as string,
     {
       expiresIn: process.env.JWT_ACCESS_EXPIRE_TIME,
     }
   );
   const refreshToken = jwt.sign(
     { uid: user._id, sid: newSession._id },
-    process.env.JWT_SECRET as string,
+    process.env.JWT_REFRESH_SECRET as string,
     {
       expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME,
     }
@@ -95,7 +95,7 @@ export const authorize = async (
     const accessToken = authorizationHeader.replace("Bearer ", "");
     let payload: string | object;
     try {
-      payload = jwt.verify(accessToken, process.env.JWT_SECRET as string);
+      payload = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET as string);
     } catch (err) {
       return res.status(401).send({ message: "Unauthorized" });
     }
@@ -123,7 +123,7 @@ export const refreshTokens = async (req: Request, res: Response) => {
     const reqRefreshToken = authorizationHeader.replace("Bearer ", "");
     let payload: string | object;
     try {
-      payload = jwt.verify(reqRefreshToken, process.env.JWT_SECRET as string);
+      payload = jwt.verify(reqRefreshToken, process.env.JWT_REFRESH_SECRET as string);
     } catch (err) {
       await SessionModel.findByIdAndDelete(req.body.sid);
       return res.status(401).send({ message: "Unauthorized" });
@@ -142,14 +142,14 @@ export const refreshTokens = async (req: Request, res: Response) => {
     });
     const newAccessToken = jwt.sign(
       { uid: user._id, sid: newSession._id },
-      process.env.JWT_SECRET as string,
+      process.env.JWT_ACCESS_SECRET as string,
       {
         expiresIn: process.env.JWT_ACCESS_EXPIRE_TIME,
       }
     );
     const newRefreshToken = jwt.sign(
       { uid: user._id, sid: newSession._id },
-      process.env.JWT_SECRET as string,
+      process.env.JWT_REFRESH_SECRET as string,
       { expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME }
     );
     return res
@@ -162,8 +162,6 @@ export const refreshTokens = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   const currentSession = req.session;
   await SessionModel.deleteOne({ _id: (currentSession as ISession)._id });
-  req.user = null;
-  req.session = null;
   return res.status(204).end();
 };
 
@@ -219,14 +217,14 @@ export const googleRedirect = async (req: Request, res: Response) => {
   });
   const accessToken = jwt.sign(
     { uid: existingUser._id, sid: newSession._id },
-    process.env.JWT_SECRET as string,
+    process.env.JWT_ACCESS_SECRET as string,
     {
       expiresIn: process.env.JWT_ACCESS_EXPIRE_TIME,
     }
   );
   const refreshToken = jwt.sign(
     { uid: existingUser._id, sid: newSession._id },
-    process.env.JWT_SECRET as string,
+    process.env.JWT_REFRESH_SECRET as string,
     {
       expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME,
     }

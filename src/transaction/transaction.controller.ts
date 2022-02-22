@@ -85,7 +85,7 @@ export const getIncomeStats = async (req: Request, res: Response) => {
     const monthName = months[i - 1];
     const transactions = incomes?.filter((transaction) => {
       if (
-        Number(transaction.date.split("-")[1]) === i &&
+        Number(transaction.date.split("-")[1]) === i  &&
         Number(transaction.date.split("-")[0]) === new Date().getFullYear()
       ) {
         return true;

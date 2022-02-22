@@ -56,14 +56,14 @@ describe("Transaction router test suite", () => {
     const validReqBody = {
       description: "Test",
       amount: 1,
-      date: "2021-12-31",
+      date: new Date().getFullYear() + "-12-31",
       category: Categories.SALARY,
     };
 
     const invalidReqBody = {
       description: "Test",
       amount: 0,
-      date: "2021-12-31",
+      date: new Date().getFullYear() + "-12-31",
     };
 
     context("With validReqBody", () => {
@@ -85,7 +85,7 @@ describe("Transaction router test suite", () => {
           .send({
             description: "Test",
             amount: 1,
-            date: "2021-11-31",
+            date: new Date().getFullYear() + "-11-31",
             category: Categories.SALARY,
           });
         await supertest(app)
@@ -94,7 +94,7 @@ describe("Transaction router test suite", () => {
           .send({
             description: "Test",
             amount: 1,
-            date: "2021-11-30",
+            date: new Date().getFullYear() + "-11-30",
             category: Categories.SALARY,
           });
         await supertest(app)
@@ -103,7 +103,7 @@ describe("Transaction router test suite", () => {
           .send({
             description: "Test",
             amount: 1,
-            date: "2021-08-31",
+            date: new Date().getFullYear() + "-08-31",
             category: Categories.SALARY,
           });
       });
@@ -197,14 +197,14 @@ describe("Transaction router test suite", () => {
     const validReqBody = {
       description: "Test",
       amount: 1,
-      date: "2021-12-31",
+      date: new Date().getFullYear() + "-12-31",
       category: Categories.UTILITIES,
     };
 
     const invalidReqBody = {
       description: "Test",
       amount: 1,
-      date: "2021-12-31",
+      date: new Date().getFullYear() + "-12-31",
       category: "qwerty123",
     };
 
@@ -323,28 +323,28 @@ describe("Transaction router test suite", () => {
             {
               description: "Test",
               amount: 1,
-              date: "2021-12-31",
+              date: new Date().getFullYear() + "-12-31",
               category: Categories.SALARY,
               _id: (updatedUser as IUser).transactions[0]._id?.toString(),
             },
             {
               description: "Test",
               amount: 1,
-              date: "2021-11-31",
+              date: new Date().getFullYear() + "-11-31",
               category: Categories.SALARY,
               _id: (updatedUser as IUser).transactions[1]._id?.toString(),
             },
             {
               description: "Test",
               amount: 1,
-              date: "2021-11-30",
+              date: new Date().getFullYear() + "-11-30",
               category: Categories.SALARY,
               _id: (updatedUser as IUser).transactions[2]._id?.toString(),
             },
             {
               description: "Test",
               amount: 1,
-              date: "2021-08-31",
+              date: new Date().getFullYear() + "-08-31",
               category: Categories.SALARY,
               _id: (updatedUser as IUser).transactions[3]._id?.toString(),
             },
@@ -418,7 +418,7 @@ describe("Transaction router test suite", () => {
             {
               description: "Test",
               amount: 1,
-              date: "2021-12-31",
+              date: new Date().getFullYear() + "-12-31",
               category: Categories.UTILITIES,
               _id: (updatedUser as IUser).transactions[4]._id?.toString(),
             },
@@ -693,7 +693,7 @@ describe("Transaction router test suite", () => {
     context("Valid request", () => {
       beforeAll(async () => {
         response = await supertest(app)
-          .get(`/transaction/period-data?date=2021-12`)
+          .get(`/transaction/period-data?date=${new Date().getFullYear()}-12`)
           .set("Authorization", `Bearer ${accessToken}`);
         updatedUser = await UserModel.findOne({
           email: "test@email.com",
@@ -764,7 +764,7 @@ describe("Transaction router test suite", () => {
     context("Without providing 'accessToken'", () => {
       beforeAll(async () => {
         response = await supertest(app).get(
-          `/transaction/period-data?date=2021-12`
+          `/transaction/period-data?date=${new Date().getFullYear()}-12`
         );
       });
 
@@ -780,7 +780,7 @@ describe("Transaction router test suite", () => {
     context("With invalid 'accessToken'", () => {
       beforeAll(async () => {
         response = await supertest(app)
-          .get(`/transaction/period-data?date=2021-12`)
+          .get(`/transaction/period-data?date=${new Date().getFullYear()}-12`)
           .set("Authorization", `Bearer qwerty123`);
       });
 

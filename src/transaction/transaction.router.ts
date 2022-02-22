@@ -17,7 +17,7 @@ import {
 import { Categories } from "./../helpers/typescript-helpers/enums";
 
 const addIncomeSchema = Joi.object({
-  description: Joi.string().required(),
+  description: Joi.string().min(1).max(300).required(),
   amount: Joi.number().required().min(1),
   date: Joi.string()
     .custom((value, helpers) => {
@@ -37,7 +37,7 @@ const addIncomeSchema = Joi.object({
 });
 
 const addExpenseSchema = Joi.object({
-  description: Joi.string().required(),
+  description: Joi.string().min(1).max(100).required(),
   amount: Joi.number().required().min(1),
   date: Joi.string()
     .custom((value, helpers) => {
