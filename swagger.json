@@ -740,6 +740,7 @@
             "type": "integer",
             "description": "Income amount",
             "minimum": 1,
+            "maximum": 1000000000,
             "example": 100
           },
           "date": {
@@ -769,7 +770,6 @@
               "amount": {
                 "type": "integer",
                 "description": "Income amount",
-                "minimum": 1,
                 "example": 100
               },
               "date": {
@@ -804,6 +804,7 @@
             "type": "integer",
             "description": "Expense amount",
             "minimum": 1,
+            "maximum": 1000000000,
             "example": 100
           },
           "date": {
@@ -852,7 +853,6 @@
               "amount": {
                 "type": "integer",
                 "description": "Expense amount",
-                "minimum": 1,
                 "example": 100
               },
               "date": {
@@ -913,7 +913,6 @@
                 "amount": {
                   "type": "integer",
                   "description": "Income amount",
-                  "minimum": 1,
                   "example": 100
                 },
                 "date": {
@@ -1042,7 +1041,6 @@
                 "amount": {
                   "type": "integer",
                   "description": "Expense amount",
-                  "minimum": 1,
                   "example": 100
                 },
                 "date": {
@@ -1205,7 +1203,8 @@
             "type": "integer",
             "description": "New balance",
             "example": 1,
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 1000000000
           }
         }
       },

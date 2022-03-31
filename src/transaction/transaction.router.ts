@@ -18,7 +18,7 @@ import { Categories } from "./../helpers/typescript-helpers/enums";
 
 const addIncomeSchema = Joi.object({
   description: Joi.string().min(1).max(300).required(),
-  amount: Joi.number().required().min(1),
+  amount: Joi.number().required().min(1).max(1000000000),
   date: Joi.string()
     .custom((value, helpers) => {
       const dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
@@ -38,7 +38,7 @@ const addIncomeSchema = Joi.object({
 
 const addExpenseSchema = Joi.object({
   description: Joi.string().min(1).max(100).required(),
-  amount: Joi.number().required().min(1),
+  amount: Joi.number().required().min(1).max(1000000000),
   date: Joi.string()
     .custom((value, helpers) => {
       const dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;

@@ -6,7 +6,7 @@ import validate from "../../helpers/function-helpers/validate";
 import { updateUserBalance, getUserInfo } from "./user.controller";
 
 const userBalanceSchema = Joi.object({
-  newBalance: Joi.number().required().min(1),
+  newBalance: Joi.number().required().min(1).max(1000000000),
 });
 
 const router = Router();
