@@ -15,7 +15,7 @@ import validate from "../helpers/function-helpers/validate";
 
 const signUpInSchema = Joi.object({
   email: Joi.string().min(3).max(254).required(),
-  password: Joi.string().min(8).required(),
+  password: Joi.string().min(8).max(100).required(),
 });
 
 const refreshTokensSchema = Joi.object({
